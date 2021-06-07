@@ -1,0 +1,97 @@
+{
+	"name": "Ex 1 Task 2 - Explore Data Lake with Spark",
+	"properties": {
+		"folder": {
+			"name": "Exercise 1"
+		},
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "SparkPool01",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/06a2d317-3061-45f6-89b4-4ef3424d6693/resourceGroups/azure-synapse-aidlab-rg/providers/Microsoft.Synapse/workspaces/az-synapse-aid-lab-ws/bigDataPools/SparkPool01",
+				"name": "SparkPool01",
+				"type": "Spark",
+				"endpoint": "https://az-synapse-aid-lab-ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SparkPool01",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"microsoft": {
+						"language": "python"
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"df = spark.read.load('abfss://wwi@azsynapseaiddl.dfs.core.windows.net/factsale-parquet/2012/Q1/InvoiceDateKey=2012-01-01/part-00007-82fb0c25-17e0-4fc1-8f67-dd23466240a5.c000.snappy.parquet', format='parquet')\r\n",
+					"display(df.limit(100))"
+				],
+				"execution_count": 4
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"data_path = spark.read.load(\r\n",
+					"   'abfss://wwi@azsynapseaiddl.dfs.core.windows.net/factsale-csv/2012/Q1/*/*',\r\n",
+					"   format='csv',\r\n",
+					"   sep=\"|\",\r\n",
+					"   header=True)\r\n",
+					"\r\n",
+					"display(data_path.limit(100))"
+				],
+				"execution_count": 3
+			}
+		]
+	}
+}
