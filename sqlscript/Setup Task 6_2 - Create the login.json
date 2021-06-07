@@ -11,7 +11,7 @@
 			},
 			"currentConnection": {
 				"poolName": "uiapsynapseaiddsql",
-				"databaseName": "uiapsynapseaiddsql"
+				"databaseName": "master"
 			},
 			"resultLimit": 5000
 		},
