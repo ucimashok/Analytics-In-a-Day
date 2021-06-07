@@ -10,8 +10,8 @@
 				"language": "sql"
 			},
 			"currentConnection": {
-				"poolName": "sqlpool01",
-				"databaseName": "sqlpool01"
+				"poolName": "uiapsynapseaiddsql",
+				"databaseName": "uiapsynapseaiddsql"
 			},
 			"resultLimit": 5000
 		},
