@@ -1,0 +1,20 @@
+{
+	"name": "Ex 4 Task 1 - Analyze Transactions",
+	"properties": {
+		"folder": {
+			"name": "Exercise 4"
+		},
+		"content": {
+			"query": "SELECT \n    CustomerKey, \n    SUM(Quantity) as Quantity\nFROM \n    wwi.FactSale\nGROUP BY \n    CustomerKey",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "sqlpool01",
+				"databaseName": "sqlpool01"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
