@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "uiap-synapse-aid-synapsews"
+		},
+		"asadatalake01_accountKey": {
+			"value": ""
+		},
+		"asastore01_connectionString": {
+			"value": ""
+		},
+		"sqlpool01_connectionString": {
+			"value": ""
+		},
+		"uiap-synapse-aid-synapsews-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"asadatalake01_properties_typeProperties_url": {
+			"value": "https://uiapsynapseaiddl.dfs.core.windows.net"
+		},
+		"uiap-synapse-aid-synapsews-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://uiapsynapseaiddl.dfs.core.windows.net"
+		}
+	}
+}
