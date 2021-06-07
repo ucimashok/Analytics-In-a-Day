@@ -1,0 +1,20 @@
+{
+	"name": "Setup Task 5 - Configure the SQL on-demand pool",
+	"properties": {
+		"folder": {
+			"name": "Setup"
+		},
+		"content": {
+			"query": "CREATE DATABASE SQLOnDemand01\n\n\nCREATE CREDENTIAL [https://uiapsynapseaiddl.dfs.core.windows.net]\nWITH IDENTITY='User Identity';",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "master"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
