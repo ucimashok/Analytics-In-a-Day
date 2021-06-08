@@ -1,5 +1,5 @@
 {
-	"name": "Exercise 5 - Create Sample Data for Predict",
+	"name": "Ex 5 Task 1_1 - Create sample Data for Predict",
 	"properties": {
 		"folder": {
 			"name": "Exercise 5"
@@ -10,8 +10,8 @@
 				"language": "sql"
 			},
 			"currentConnection": {
-				"poolName": "sqlpool01",
-				"databaseName": "sqlpool01"
+				"poolName": "uiapsynapseaiddsql",
+				"databaseName": "uiapsynapseaiddsql"
 			},
 			"resultLimit": 5000
 		},
