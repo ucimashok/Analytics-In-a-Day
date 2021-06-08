@@ -8015,20 +8015,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/PowerBIWorkspaceLinkedService')]",
-			"type": "Microsoft.Synapse/workspaces/linkedServices",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"annotations": [],
-				"type": "PowerBIWorkspace",
-				"typeProperties": {
-					"workspaceID": "02fbc856-0768-4dad-b953-1dd023192bcb",
-					"tenantID": "008502d6-3f79-46f0-ab37-9354e3fe80ff"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/asadatalake01')]",
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
 			"apiVersion": "2019-06-01-preview",
