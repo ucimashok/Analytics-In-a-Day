@@ -71,7 +71,6 @@
 				"cell_type": "code",
 				"source": [
 					"df = spark.read.load('abfss://dev@uiapsynapseaiddl.dfs.core.windows.net/bronze/wwi-factsale.csv', format=\"csv\"\r\n",
-					"## If header exists uncomment line bellow\r\n",
 					", header=True, sep=\"|\"\r\n",
 					")"
 				],
