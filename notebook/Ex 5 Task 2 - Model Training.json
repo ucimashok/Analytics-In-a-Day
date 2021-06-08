@@ -29,7 +29,7 @@
 			},
 			"kernelspec": {
 				"name": "synapse_pyspark",
-				"display_name": "python"
+				"display_name": "Synapse PySpark"
 			},
 			"language_info": {
 				"name": "python"
@@ -70,19 +70,19 @@
 			{
 				"cell_type": "code",
 				"source": [
-					"df = spark.read.load('abfss://dev@<primary_storage>.dfs.core.windows.net/bronze/wwi-factsale.csv', format=\"csv\"\r\n",
+					"df = spark.read.load('abfss://dev@uiapsynapseaiddl.dfs.core.windows.net/bronze/wwi-factsale.csv', format=\"csv\"\r\n",
 					"## If header exists uncomment line bellow\r\n",
 					", header=True, sep=\"|\"\r\n",
 					")"
 				],
-				"execution_count": 35
+				"execution_count": 1
 			},
 			{
 				"cell_type": "code",
 				"source": [
 					"df.createOrReplaceTempView(\"facts\")"
 				],
-				"execution_count": 36
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -92,7 +92,7 @@
 				"source": [
 					"display(spark.sql(\"SELECT * FROM facts WHERE `Customer Key` == '11' ORDER BY `Stock Item Key`\"))"
 				],
-				"execution_count": 37
+				"execution_count": null
 			},
 			{
 				"cell_type": "markdown",
@@ -115,7 +115,7 @@
 					"print(\"Number of records:\", df3.count())\n",
 					"df3.show(10)"
 				],
-				"execution_count": 38
+				"execution_count": null
 			},
 			{
 				"cell_type": "markdown",
@@ -134,7 +134,7 @@
 					"# Split the dataframe into test and training dataframes\n",
 					"df_train, df_test = df3.randomSplit([trainingFraction, testingFraction], seed=seed)"
 				],
-				"execution_count": 39
+				"execution_count": null
 			},
 			{
 				"cell_type": "markdown",
@@ -150,7 +150,7 @@
 					"\n",
 					"vectorAssembler = VectorAssembler(inputCols = ['customerkey', 'stockitemkey'], outputCol = 'features')"
 				],
-				"execution_count": 40
+				"execution_count": null
 			},
 			{
 				"cell_type": "markdown",
@@ -184,7 +184,7 @@
 					"\n",
 					"lin_reg = LinearRegression(featuresCol = 'features', labelCol='quantity', maxIter = 10, regParam=0.3)"
 				],
-				"execution_count": 41
+				"execution_count": null
 			},
 			{
 				"cell_type": "markdown",
@@ -222,7 +222,7 @@
 					"\n",
 					"partialPipeline = Pipeline().setStages(stages)"
 				],
-				"execution_count": 42
+				"execution_count": null
 			},
 			{
 				"cell_type": "markdown",
@@ -239,7 +239,7 @@
 					"print(\"Coefficients: \" + str(pipelineModel.stages[-1].coefficients))\n",
 					"print(\"Intercept: \" + str(pipelineModel.stages[-1].intercept))"
 				],
-				"execution_count": 43
+				"execution_count": null
 			},
 			{
 				"cell_type": "markdown",
@@ -259,7 +259,7 @@
 					"from pyspark.sql.functions import rand\n",
 					"display(df_pred.select([\"quantity\",  \"prediction\"]).orderBy(rand()).limit(5))"
 				],
-				"execution_count": 44
+				"execution_count": null
 			},
 			{
 				"cell_type": "markdown",
@@ -280,7 +280,7 @@
 					"    (\"stockitemkey\", FloatTensorType([1, 1]))\n",
 					"]"
 				],
-				"execution_count": 53
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -288,7 +288,7 @@
 					"model_onnx = convert_sparkml(pipelineModel, 'sparkml GeneralizedLinearRegression', initial_types)\n",
 					"model_onnx"
 				],
-				"execution_count": 54
+				"execution_count": null
 			},
 			{
 				"cell_type": "markdown",
@@ -304,12 +304,12 @@
 					"with open(\"model.onnx\", \"wb\") as f:\n",
 					"    f.write(model_onnx.SerializeToString())"
 				],
-				"execution_count": 47
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
 				"source": [
-					"connection_string = \"DefaultEndpointsProtocol=https;AccountName=<blob_storage>;AccountKey=<blob_storage_account_key>;EndpointSuffix=core.windows.net\"\n",
+					"connection_string = \"DefaultEndpointsProtocol=https;AccountName=uiapsynapseaidbs;AccountKey=Mbd+poBA+he4ducXRGRaLgG0IJPT7/UGz0IH+BJ0WrEXJcvPvMgTKgQGli5kxWlJfcsu2geP2XU+g0HNBXv6TQ==;EndpointSuffix=core.windows.net\"\n",
 					"\n",
 					"from azure.storage.blob import BlobClient\n",
 					"\n",
@@ -318,7 +318,7 @@
 					"with open(\"./model.onnx\", \"rb\") as data:\n",
 					"    blob.upload_blob(data,overwrite=True)"
 				],
-				"execution_count": 48
+				"execution_count": null
 			}
 		]
 	}
