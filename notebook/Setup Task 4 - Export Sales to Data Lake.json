@@ -167,6 +167,64 @@
 					"    start_date = end_date + relativedelta(days=1)"
 				],
 				"execution_count": 4
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Export WWI sales data to Delta Lake\r\n",
+					""
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"from pyspark.sql import functions as fn\r\n",
+					"quarters = 20\r\n",
+					"start_date = datetime(2012, 1, 1)\r\n",
+					"\r\n",
+					"wwi_sales2 = wwi_sales \\\r\n",
+					"        .withColumn(\"InvoiceYear\", fn.year(wwi_sales['InvoiceDateKey'])) \\\r\n",
+					"        .withColumn(\"InvoiceQuarter\", fn.quarter(wwi_sales['InvoiceDateKey'])) \\\r\n",
+					"\r\n",
+					"for quarter in np.arange(1, quarters + 1):\r\n",
+					"\r\n",
+					"    quarter_number = 4 if quarter % 4 == 0 else quarter % 4\r\n",
+					"    end_date = start_date + relativedelta(months=3) + relativedelta(days=-1)\r\n",
+					"    \r\n",
+					"    print(f'Exporting data for {start_date.year} Q{quarter_number} ({start_date:%Y-%m-%d} : {end_date:%Y-%m-%d}) ...')\r\n",
+					"\r\n",
+					"    storage_path_delta = f'abfss://wwi@<primary_storage>.dfs.core.windows.net/factsale-deltalake'\r\n",
+					"\r\n",
+					"    wwi_sales2 \\\r\n",
+					"        .where((wwi_sales['InvoiceDateKey'] >= f'{start_date:%Y-%m-%d}') & (wwi_sales['InvoiceDateKey'] <= f'{end_date:%Y-%m-%d}')) \\\r\n",
+					"        .write \\\r\n",
+					"        .format(\"delta\") \\\r\n",
+					"        .partitionBy('InvoiceYear', 'InvoiceQuarter', 'InvoiceDateKey') \\\r\n",
+					"        .mode(\"append\") \\\r\n",
+					"        .save(storage_path_delta)\r\n",
+					"\r\n",
+					"    start_date = end_date + relativedelta(days=1)"
+				],
+				"execution_count": 1
 			}
 		]
 	}
