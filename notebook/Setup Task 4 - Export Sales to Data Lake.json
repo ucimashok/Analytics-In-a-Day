@@ -89,7 +89,7 @@
 					"    .withColumnRenamed('Total Chiller Items', 'TotalChillerItems') \\\n",
 					"    .withColumnRenamed('Lineage Key', 'LineageKey')"
 				],
-				"execution_count": 1
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -98,7 +98,7 @@
 					"from datetime import datetime\n",
 					"from dateutil.relativedelta import relativedelta"
 				],
-				"execution_count": 2
+				"execution_count": 3
 			},
 			{
 				"cell_type": "markdown",
@@ -212,7 +212,7 @@
 					"    \r\n",
 					"    print(f'Exporting data for {start_date.year} Q{quarter_number} ({start_date:%Y-%m-%d} : {end_date:%Y-%m-%d}) ...')\r\n",
 					"\r\n",
-					"    storage_path_delta = f'abfss://wwi@<primary_storage>.dfs.core.windows.net/factsale-deltalake'\r\n",
+					"    storage_path_delta = f'abfss://wwi@uiapsynapseaiddl.dfs.core.windows.net/factsale-deltalake'\r\n",
 					"\r\n",
 					"    wwi_sales2 \\\r\n",
 					"        .where((wwi_sales['InvoiceDateKey'] >= f'{start_date:%Y-%m-%d}') & (wwi_sales['InvoiceDateKey'] <= f'{end_date:%Y-%m-%d}')) \\\r\n",
@@ -224,7 +224,7 @@
 					"\r\n",
 					"    start_date = end_date + relativedelta(days=1)"
 				],
-				"execution_count": 1
+				"execution_count": 7
 			}
 		]
 	}
