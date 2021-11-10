@@ -1,0 +1,17 @@
+{
+	"name": "employeeTableCreation",
+	"properties": {
+		"content": {
+			"query": "CREATE TABLE test.employee\n(\n    Ename varchar(200),\n    Ecode int,\n    EmpRole VARCHAR(200),\n    Department VARCHAR(200)\n\n)\n\n\n\nSELECT * from   test.employee",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "uiapsynapseaiddsql",
+				"poolName": "uiapsynapseaiddsql"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
